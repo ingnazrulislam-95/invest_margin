@@ -1,0 +1,956 @@
+<!doctype html>
+<!-- থিসিস: সুইস গ্রিড, লাল ও কালো বিপরীত রূপ, জিকজ্যাক সারি ও রিয়েল-টাইম ফাইন্যান্সিং ক্যালকুলেটর -->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Vanguard Assets | Private Capital &amp; Lease-to-Own Asset Financing</title>
+  <meta name="description" content="Direct private funding and structured lease-to-own solutions for premium vehicles, residential apartments, and enterprise assets.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2048%2048'%3E%3Cpath%20d='M24%201.5%2043.5%2012.75v22.5L24%2046.5%204.5%2035.25v-22.5z'%20fill='%23D9301F'/%3E%3Cpath%20d='M24%206%2039.6%2015v18L24%2042%208.4%2033V15z'%20fill='none'%20stroke='%23111111'%20stroke-width='1.5'/%3E%3Ctext%20x='24'%20y='24.5'%20dominant-baseline='central'%20text-anchor='middle'%20font-family='sans-serif'%20font-size='26'%20font-weight='700'%20fill='%23FFFFFF'%3EW%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anek+Latin:wght@700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bc-primary: #D9301F;
+      --bc-secondary: #111111;
+      --bc-on-primary: #FFFFFF;
+      --bc-on-secondary: #FFFFFF;
+      --bc-font-heading: 'Anek Latin', 'Anek Bangla', sans-serif;
+      --bc-font-body: 'Inter', 'Hind Siliguri', sans-serif;
+      --ink: #111111;
+      --ink-muted: #555555;
+      --ground: #FFFFFF;
+      --tint: #F9F9F9;
+      --line: rgba(17, 17, 17, 0.12);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-synthesis: none; }
+    body {
+      font-family: var(--bc-font-body);
+      color: var(--ink);
+      background-color: var(--ground);
+      line-height: 1.65;
+      font-size: 16px;
+      overflow-x: hidden;
+    }
+    h1, h2, h3, h4 {
+      font-family: var(--bc-font-heading);
+      font-weight: 800;
+      letter-spacing: 0;
+      line-height: 1.15;
+    }
+    h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); }
+    h2 { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 1.25rem; }
+    h3 { font-size: 1.5rem; margin-bottom: 0.75rem; }
+    p { margin-bottom: 1rem; color: var(--ink-muted); }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; height: auto; }
+    
+    .top-bar {
+      background-color: var(--bc-primary);
+      color: var(--bc-on-primary);
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 1.5rem;
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+    .top-bar a { text-decoration: underline; color: inherit; }
+    
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--line);
+    }
+    .header-inner {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+    .nav-links a:hover { color: var(--bc-primary); }
+    
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.85rem 1.85rem;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+      border: 1px solid transparent;
+      min-height: 46px;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary {
+      background-color: var(--bc-primary);
+      color: var(--bc-on-primary);
+      box-shadow: 0 8px 24px rgba(217, 48, 31, 0.25);
+    }
+    .btn-secondary {
+      background-color: var(--bc-secondary);
+      color: var(--bc-on-secondary);
+    }
+    .btn-outline {
+      background-color: transparent;
+      border-color: var(--line);
+      color: var(--ink);
+    }
+    .btn-outline:hover {
+      border-color: var(--ink);
+    }
+    
+    .hero {
+      position: relative;
+      min-height: 82vh;
+      display: flex;
+      align-items: center;
+      color: #FFFFFF;
+      overflow: hidden;
+      padding: 5rem 1.5rem;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 1;
+    }
+    .hero-scrim {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(17,17,17,0.78) 0%, rgba(17,17,17,0.85) 100%);
+      z-index: 2;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 3;
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: left;
+    }
+    .hero p {
+      color: #E0E0E0;
+      font-size: 1.25rem;
+      max-width: 700px;
+      margin: 1.5rem 0 2.5rem;
+    }
+    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+    
+    .section-wrap {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 6rem 1.5rem;
+    }
+    .zigzag-row {
+      display: flex;
+      align-items: center;
+      gap: 4rem;
+      margin-bottom: 6rem;
+    }
+    .zigzag-row.reverse { flex-direction: row-reverse; }
+    .zigzag-img {
+      flex: 0 0 55%;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 12px 36px rgba(0,0,0,0.08);
+      aspect-ratio: 16/10;
+    }
+    .zigzag-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .zigzag-text {
+      flex: 1;
+    }
+    .tag {
+      display: inline-block;
+      text-transform: uppercase;
+      font-size: 0.8rem;
+      letter-spacing: 1px;
+      font-weight: 700;
+      color: var(--bc-primary);
+      margin-bottom: 0.75rem;
+    }
+    .divider {
+      height: 1px;
+      background: var(--line);
+      margin: 2rem 0;
+    }
+    
+    /* Stats Bar */
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      padding: 3rem 0;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 5rem;
+    }
+    .metric-item strong {
+      display: block;
+      font-size: 2.75rem;
+      font-family: var(--bc-font-heading);
+      color: var(--ink);
+      line-height: 1;
+    }
+    .metric-item span {
+      font-size: 0.95rem;
+      color: var(--ink-muted);
+      font-weight: 500;
+    }
+
+    /* Calculator */
+    .calc-box {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 3.5rem;
+      align-items: center;
+      padding: 3.5rem 0;
+    }
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      font-size: 0.95rem;
+    }
+    input[type="range"] {
+      width: 100%;
+      accent-color: var(--bc-primary);
+      height: 6px;
+      cursor: pointer;
+    }
+    .range-val {
+      font-family: var(--bc-font-heading);
+      font-size: 1.5rem;
+      color: var(--bc-primary);
+      font-weight: 700;
+      float: right;
+    }
+    .asset-types {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+    .type-btn {
+      padding: 0.85rem;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: var(--ground);
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-align: center;
+      transition: all 0.2s ease;
+    }
+    .type-btn.active {
+      border-color: var(--bc-primary);
+      background: rgba(217, 48, 31, 0.05);
+      color: var(--bc-primary);
+    }
+    .calc-result {
+      background: var(--tint);
+      padding: 2.5rem;
+      border-radius: 20px;
+      border: 1px solid var(--line);
+    }
+    .calc-result h4 {
+      font-size: 1.1rem;
+      color: var(--ink-muted);
+      margin-bottom: 0.5rem;
+    }
+    .big-price {
+      font-family: var(--bc-font-heading);
+      font-size: 3.25rem;
+      color: var(--bc-primary);
+      font-weight: 800;
+      line-height: 1;
+      margin-bottom: 1.5rem;
+    }
+    .calc-list {
+      list-style: none;
+      border-top: 1px solid var(--line);
+      padding-top: 1.25rem;
+    }
+    .calc-list li {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.5rem 0;
+      font-size: 0.95rem;
+      color: var(--ink-muted);
+    }
+    .calc-list li strong { color: var(--ink); }
+
+    /* Workflow Steps */
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+    .step-card {
+      border-top: 2px solid var(--bc-primary);
+      padding-top: 1.5rem;
+    }
+    .step-num {
+      font-family: var(--bc-font-heading);
+      font-size: 2rem;
+      color: var(--bc-primary);
+      font-weight: 800;
+    }
+
+    /* Modal / Form */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(17,17,17,0.7);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      padding: 1.5rem;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal-box {
+      background: #FFFFFF;
+      max-width: 650px;
+      width: 100%;
+      border-radius: 20px;
+      padding: 2.5rem;
+      position: relative;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.25);
+    }
+    .modal-close {
+      position: absolute;
+      top: 1.25rem;
+      right: 1.25rem;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--ink-muted);
+    }
+    .input-field {
+      width: 100%;
+      padding: 0.85rem 1rem;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      font-family: inherit;
+      font-size: 1rem;
+      margin-bottom: 1rem;
+    }
+    .input-field:focus {
+      outline: none;
+      border-color: var(--bc-primary);
+    }
+
+    /* Dashboard Drawer */
+    .dash-panel {
+      position: fixed;
+      right: -100%;
+      top: 0;
+      width: 100%;
+      max-width: 820px;
+      height: 100%;
+      background: #FFFFFF;
+      box-shadow: -10px 0 40px rgba(0,0,0,0.2);
+      z-index: 200;
+      transition: right 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+    }
+    .dash-panel.open { right: 0; }
+    .dash-header {
+      padding: 1.5rem 2rem;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .dash-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: 2rem;
+    }
+    .table-wrap {
+      overflow-x: auto;
+      margin-top: 1.5rem;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.95rem;
+    }
+    th, td {
+      padding: 1rem 0.75rem;
+      border-bottom: 1px solid var(--line);
+    }
+    th { font-weight: 600; color: var(--ink-muted); }
+    .status-badge {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+    .status-Pending { background: #FEF3C7; color: #92400E; }
+    .status-Approved { background: #D1FAE5; color: #065F46; }
+
+    /* Footer */
+    footer {
+      background-color: var(--bc-secondary);
+      color: var(--bc-on-secondary);
+      padding: 5rem 1.5rem 3rem;
+    }
+    .footer-inner {
+      max-width: 1240px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 4rem;
+      margin-bottom: 3rem;
+    }
+    .footer-bottom {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      color: #999;
+    }
+
+    @media (max-width: 860px) {
+      .zigzag-row, .zigzag-row.reverse {
+        flex-direction: column;
+        gap: 2rem;
+      }
+      .zigzag-img { width: 100%; flex: auto; }
+      .metrics-grid, .steps-grid { grid-template-columns: 1fr 1fr; }
+      .calc-box { grid-template-columns: 1fr; gap: 2rem; }
+      .footer-inner { grid-template-columns: 1fr; gap: 2rem; }
+      .nav-links { display: none; }
+    }
+    @media (max-width: 540px) {
+      .metrics-grid, .steps-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+<meta property="og:title" content="Vanguard Assets | Private Capital &amp;amp; Lease-to-Own Asset Financing">
+<meta property="og:description" content="Direct private funding and structured lease-to-own solutions for premium vehicles, residential apartments, and enterprise assets.">
+<style id="bc-logo-css">:where([data-bc-logo]){color:inherit;text-decoration:none}</style>
+</head>
+<body id="top">
+
+  <!-- Top bar with key operational fact -->
+  <div class="top-bar">
+    <span>Direct Principal Investment | Allocation Cycle Q3-Q4 Active</span>
+    <span>Inquiries: <a href="mailto:investor@vanguardassets.com">investor@vanguardassets.com</a></span>
+  </div>
+
+  <!-- Header -->
+  <header>
+    <div class="header-inner">
+      <a href="#top" class="logo" data-bc-logo>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 161 48" width="134" height="40" overflow="visible" style="height:40px;width:auto;max-width:100%;flex:none;display:block;overflow:visible" role="img" aria-label="Website"><path d="M24 1.5 43.5 12.75v22.5L24 46.5 4.5 35.25v-22.5z" fill="#D9301F"/><path d="M24 6 39.6 15v18L24 42 8.4 33V15z" fill="none" stroke="#111111" stroke-width="1.5"/><text x="24" y="24.5" dominant-baseline="central" text-anchor="middle" font-family="'Anek Latin', 'Hind Siliguri', sans-serif" font-size="26" font-weight="700" fill="#FFFFFF">W</text><text x="58" y="24" dominant-baseline="central" font-family="'Anek Latin', 'Hind Siliguri', sans-serif" font-size="22" font-weight="700" fill="currentColor">Website</text></svg>
+      </a>
+
+      <nav class="nav-links">
+        <a href="#about">About Investor</a>
+        <a href="#financing">Asset Financing</a>
+        <a href="#calculator">EMI Calculator</a>
+        <a href="#terms">Terms &amp; Flow</a>
+      </nav>
+
+      <div style="display: flex; gap: 0.75rem; align-items: center;">
+        <button class="btn btn-outline" style="padding: 0.65rem 1.25rem; font-size: 0.85rem;" onclick="toggleDashboard(true)">Portfolio Portal</button>
+        <button class="btn btn-primary" onclick="openApplicationModal('General Inflow')">Apply for Financing</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <img class="hero-bg" src="https://images.pexels.com/photos/39485848/pexels-photo-39485848.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200" data-bc-photo-id="39485848" alt="Contemporary luxury asset architectural overview" data-bc-photo-by="mingche lee" data-bc-photo-page="https://www.pexels.com/photo/modern-apartment-building-with-balconies-39485848/">
+    <div class="hero-scrim"></div>
+    <div class="hero-content">
+      <span class="tag" style="color: #FF5A47;">Private Asset Portfolio &amp; Direct Lending</span>
+      <h1>Direct Capital for High-Value Mobility &amp; Real Estate.</h1>
+      <p>Bypassing rigid commercial banking. Structured lease-to-own vehicle acquisition and residential apartment purchase programs built on transparent equity pathways.</p>
+      <div class="hero-actions">
+        <button class="btn btn-primary" onclick="openApplicationModal('Vehicle or Property')">Apply for Financing</button>
+        <a href="#calculator" class="btn btn-secondary">Explore Investment Terms</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Section Wrap -->
+  <main class="section-wrap">
+    
+    <!-- Metrics Bar -->
+    <div class="metrics-grid">
+      <div class="metric-item">
+        <strong>$18.5M+</strong>
+        <span>Funded Assets Under Management</span>
+      </div>
+      <div class="metric-item">
+        <strong>142+</strong>
+        <span>Vehicles &amp; Homes Transferred</span>
+      </div>
+      <div class="metric-item">
+        <strong>100%</strong>
+        <span>Principal Capital Transparency</span>
+      </div>
+      <div class="metric-item">
+        <strong>48 Hrs</strong>
+        <span>Average Underwriting Decision</span>
+      </div>
+    </div>
+
+    <!-- About the Investor -->
+    <section id="about" class="zigzag-row">
+      <div class="zigzag-img">
+        <img src="https://images.pexels.com/photos/33244441/pexels-photo-33244441.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" data-bc-photo-id="33244441" alt="High-rise property investment projects" data-bc-photo-by="Jan van der Wolf" data-bc-photo-page="https://www.pexels.com/photo/modern-urban-high-rise-architecture-against-blue-sky-33244441/">
+      </div>
+      <div class="zigzag-text">
+        <span class="tag">Principal Investor Mission</span>
+        <h2>Empowering Individuals via Asset Equity.</h2>
+        <p>I operate as an independent capital sponsor focusing on asset-backed lending. Traditional banking institutions impose bureaucratic friction and punitive credit penalties on creditworthy entrepreneurs and working professionals.</p>
+        <p>My mandate is straightforward: We purchase the car or residential apartment you select, establish an equitable lease-to-own schedule, and upon full execution of the contract, title deed and ownership register in your name.</p>
+        <div style="margin-top: 1.5rem;">
+          <a href="#terms" class="btn btn-outline">Review Partnership Framework &rarr;</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Asset Categories: Car Financing (Core Focus) -->
+    <section id="financing" class="zigzag-row reverse">
+      <div class="zigzag-img">
+        <img src="https://images.pexels.com/photos/9308434/pexels-photo-9308434.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" data-bc-photo-id="9308434" alt="Modern residential asset architecture" data-bc-photo-by="Mia Vargas" data-bc-photo-page="https://www.pexels.com/photo/apartment-building-against-blue-sky-9308434/">
+      </div>
+      <div class="zigzag-text">
+        <span class="tag">Core Program</span>
+        <h2>Automotive Lease-to-Own: Structured Ownership.</h2>
+        <p>Designed for premium personal mobility, ride-share fleets, and commercial haulage. Rather than indefinite rental overhead, every monthly dollar is credited toward vehicle payoff.</p>
+        <ul style="margin: 1.25rem 0 1.75rem 1.25rem; color: var(--ink-muted);">
+          <li><strong>Zero Hidden Markups:</strong> Fixed monthly installment agreed beforehand.</li>
+          <li><strong>Direct Acquisition:</strong> Choose brand new or certified pre-owned vehicles.</li>
+          <li><strong>Full Ownership Release:</strong> Title transferred immediately upon final payment.</li>
+        </ul>
+        <button class="btn btn-primary" onclick="openApplicationModal('Vehicle Lease-to-Own')">Apply for Vehicle Capital</button>
+      </div>
+    </section>
+
+    <!-- Real Estate & Business Assets Details -->
+    <div style="margin: 6rem 0;">
+      <span class="tag">Expanded Financing Scope</span>
+      <h2>Real Estate &amp; Strategic Business Ventures.</h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 3rem; margin-top: 2.5rem;">
+        <div>
+          <h3>Apartment &amp; Condo Funding</h3>
+          <p>Long-term bridge capital and residential acquisition arrangements. We acquire the title, you reside and build equity through fixed lease installments over 2 to 10 year schedules.</p>
+          <button class="btn btn-outline" style="margin-top: 0.5rem;" onclick="openApplicationModal('Residential Real Estate')">Submit Property Deal</button>
+        </div>
+        <div>
+          <h3>Growth Venture Capital</h3>
+          <p>Structured equipment, inventory, and asset-backed lines for cashflow-positive enterprises seeking non-dilutive financing alternatives.</p>
+          <button class="btn btn-outline" style="margin-top: 0.5rem;" onclick="openApplicationModal('Business Equipment & Growth')">Pitch Venture</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Interactive EMI & Ownership Calculator -->
+    <section id="calculator" style="margin: 6rem 0;">
+      <span class="tag">Financial Planning</span>
+      <h2>Interactive Lease &amp; Repayment Estimator.</h2>
+      <p>Simulate your monthly commitment, down payment ratio, and estimated contract completion date.</p>
+
+      <div class="calc-box">
+        <div>
+          <div class="form-group">
+            <label>Select Asset Category</label>
+            <div class="asset-types">
+              <button class="type-btn active" id="btn-car" onclick="setAssetType('car')">Vehicle</button>
+              <button class="type-btn" id="btn-re" onclick="setAssetType('re')">Apartment</button>
+              <button class="type-btn" id="btn-biz" onclick="setAssetType('biz')">Business</button>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Asset Value ($): <span class="range-val" id="assetValDisplay">$35,000</span></label>
+            <input type="range" id="assetValInput" min="10000" max="300000" step="2500" value="35000" oninput="updateCalculator()">
+          </div>
+
+          <div class="form-group">
+            <label>Down Payment / Deposit (10% - 40%): <span class="range-val" id="downPayDisplay">15%</span></label>
+            <input type="range" id="downPayInput" min="10" max="40" step="5" value="15" oninput="updateCalculator()">
+          </div>
+
+          <div class="form-group">
+            <label>Lease Duration (Months): <span class="range-val" id="tenureDisplay">36 Mo</span></label>
+            <input type="range" id="tenureInput" min="12" max="84" step="6" value="36" oninput="updateCalculator()">
+          </div>
+        </div>
+
+        <div class="calc-result">
+          <h4>Estimated Monthly Lease Payment</h4>
+          <div class="big-price" id="monthlyResult">$982</div>
+          <ul class="calc-list">
+            <li><span>Initial Security Deposit:</span> <strong id="depositAmount">$5,250</strong></li>
+            <li><span>Principal Funded:</span> <strong id="fundedAmount">$29,750</strong></li>
+            <li><span>Amortized Duration:</span> <strong id="durationResult">36 Months</strong></li>
+            <li><span>Ownership Transfer Fee:</span> <strong>$0 (Zero balloon payment)</strong></li>
+          </ul>
+          <button class="btn btn-primary" style="width: 100%; margin-top: 1.5rem;" onclick="applyFromCalculator()">Lock In This Term</button>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- Terms & Conditions Workflow -->
+    <section id="terms" style="margin: 6rem 0;">
+      <span class="tag">Governance &amp; Legals</span>
+      <h2>Transparent Partnership Execution.</h2>
+      <p>Every allocation follows a vetted legal agreement executed by independent notary counsel.</p>
+
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-num">01</div>
+          <h3>Asset Selection</h3>
+          <p>You identify the exact car, apartment, or machinery from any reputable vendor or private seller.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-num">02</div>
+          <h3>Underwriting &amp; Terms</h3>
+          <p>We review proof of consistent income and finalize security deposit plus scheduled lease timeline.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-num">03</div>
+          <h3>Direct Purchase</h3>
+          <p>Portfolio releases 100% funds directly to seller. Asset is delivered to you immediately with full insurance.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-num">04</div>
+          <h3>Title Transfer</h3>
+          <p>Upon maturity of final payment, ownership title deed is unconditionally registered in your name.</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Application Modal Form -->
+  <div class="modal-overlay" id="appModal">
+    <div class="modal-box">
+      <button class="modal-close" onclick="closeApplicationModal()">&times;</button>
+      <span class="tag">Direct Application</span>
+      <h2 style="font-size: 2rem; margin-bottom: 0.5rem;">Financing Proposal</h2>
+      <p style="margin-bottom: 1.5rem;">Submit your financing requirements directly to the investor portfolio review desk.</p>
+
+      <form id="financingForm" onsubmit="handleFormSubmit(event)">
+        <label>Selected Asset Category</label>
+        <input type="text" id="formAssetCategory" class="input-field" readonly>
+
+        <label>Full Legal Name</label>
+        <input type="text" id="applicantName" class="input-field" placeholder="e.g. Marcus Vance" required>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+          <div>
+            <label>Email Address</label>
+            <input type="email" id="applicantEmail" class="input-field" placeholder="name@domain.com" required>
+          </div>
+          <div>
+            <label>Phone / WhatsApp</label>
+            <input type="tel" id="applicantPhone" class="input-field" placeholder="+1 (555) 000-0000" required>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+          <div>
+            <label>Requested Asset Value ($)</label>
+            <input type="number" id="formAssetValue" class="input-field" placeholder="35000" required>
+          </div>
+          <div>
+            <label>Proposed Term (Months)</label>
+            <input type="number" id="formAssetTerm" class="input-field" placeholder="36" required>
+          </div>
+        </div>
+
+        <label>Monthly Income &amp; Asset Details</label>
+        <textarea id="applicantNotes" class="input-field" rows="3" placeholder="Describe vehicle make/model or apartment address, and verified monthly revenue source..." required></textarea>
+
+        <button type="submit" class="btn btn-primary" style="width: 100%;">Submit Proposal to Principal</button>
+        <div id="formSuccess" style="display:none; color: #065F46; font-weight: 600; text-align: center; margin-top: 1rem; background: #D1FAE5; padding: 0.75rem; border-radius: 12px;">
+          Application logged successfully. You can monitor it in the Portfolio Portal.
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Admin / Investor Dashboard Drawer -->
+  <aside class="dash-panel" id="dashPanel">
+    <div class="dash-header">
+      <div>
+        <h3 style="margin-bottom: 0;">Portfolio Inflow Portal</h3>
+        <p style="margin-bottom: 0; font-size: 0.85rem;">Private Investor Dashboard &amp; Application Log</p>
+      </div>
+      <button class="btn btn-outline" style="padding: 0.5rem 1rem;" onclick="toggleDashboard(false)">Close &times;</button>
+    </div>
+    <div class="dash-body">
+      <div style="display: flex; gap: 1rem; margin-bottom: 1.5rem; flex-wrap: wrap;">
+        <div style="background: var(--tint); padding: 1rem; border-radius: 12px; flex: 1; border: 1px solid var(--line);">
+          <div style="font-size: 0.85rem; color: var(--ink-muted);">Total Pipeline Requests</div>
+          <strong style="font-size: 1.5rem;" id="totalPipelineCount">0</strong>
+        </div>
+        <div style="background: var(--tint); padding: 1rem; border-radius: 12px; flex: 1; border: 1px solid var(--line);">
+          <div style="font-size: 0.85rem; color: var(--ink-muted);">Capital Pipeline Sum</div>
+          <strong style="font-size: 1.5rem; color: var(--bc-primary);" id="totalPipelineSum">$0</strong>
+        </div>
+      </div>
+
+      <h4>Submitted Inflows</h4>
+      <div class="table-wrap">
+        <div style="overflow-x:auto;-webkit-overflow-scrolling:touch"><table>
+          <thead>
+            <tr>
+              <th>Applicant</th>
+              <th>Asset Category</th>
+              <th>Value</th>
+              <th>Term</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="applicationTableBody">
+            <!-- Populated via JS -->
+          </tbody>
+        </table></div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-inner">
+      <div>
+        <a href="#top" class="logo" data-bc-logo style="color: #FFFFFF; margin-bottom: 1.5rem; display: inline-block;">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 161 48" width="134" height="40" overflow="visible" style="height:40px;width:auto;max-width:100%;flex:none;display:block;overflow:visible" role="img" aria-label="Website"><path d="M24 1.5 43.5 12.75v22.5L24 46.5 4.5 35.25v-22.5z" fill="#D9301F"/><path d="M24 6 39.6 15v18L24 42 8.4 33V15z" fill="none" stroke="#111111" stroke-width="1.5"/><text x="24" y="24.5" dominant-baseline="central" text-anchor="middle" font-family="'Anek Latin', 'Hind Siliguri', sans-serif" font-size="26" font-weight="700" fill="#FFFFFF">W</text><text x="58" y="24" dominant-baseline="central" font-family="'Anek Latin', 'Hind Siliguri', sans-serif" font-size="22" font-weight="700" fill="currentColor">Website</text></svg>
+        </a>
+        <p style="color: #A0A0A0; max-width: 420px;">Private individual capital provider delivering lease-to-own automotive financing and prime residential property funding with absolute integrity.</p>
+      </div>
+      <div>
+        <h4 style="color: #FFFFFF; font-size: 1.1rem; margin-bottom: 1rem;">Asset Programs</h4>
+        <p style="color: #A0A0A0; font-size: 0.95rem; line-height: 1.8;">
+          <a href="#financing">Vehicle Rent-to-Own</a><br>
+          <a href="#financing">Residential Apartments</a><br>
+          <a href="#financing">Commercial Capital</a><br>
+          <a href="#calculator">Lease Calculator</a>
+        </p>
+      </div>
+      <div>
+        <h4 style="color: #FFFFFF; font-size: 1.1rem; margin-bottom: 1rem;">Legal &amp; Desk</h4>
+        <p style="color: #A0A0A0; font-size: 0.95rem; line-height: 1.8;">
+          Capital Facility: New York &amp; International<br>
+          Inquiries: <a href="mailto:investor@vanguardassets.com" style="color: #FFFFFF; text-decoration: underline;">investor@vanguardassets.com</a><br>
+          Notary Escrow Secured
+        </p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; <span id="year"></span> Vanguard Private Asset Portfolio. All rights reserved.</span>
+      <span>Direct Principal Lending &bull; Not a deposit-taking bank</span>
+    </div>
+  <div data-bc-credit style="font-size:12px;line-height:1.6;opacity:.8;text-align:center;margin:12px auto 0;padding:0 16px">Photos: <a href="https://www.pexels.com/photo/modern-apartment-building-with-balconies-39485848/" rel="noopener" target="_blank" style="color:inherit">mingche lee</a>, <a href="https://www.pexels.com/photo/modern-urban-high-rise-architecture-against-blue-sky-33244441/" rel="noopener" target="_blank" style="color:inherit">Jan van der Wolf</a>, <a href="https://www.pexels.com/photo/apartment-building-against-blue-sky-9308434/" rel="noopener" target="_blank" style="color:inherit">Mia Vargas</a> · <a href="https://www.pexels.com" rel="noopener" target="_blank" style="color:inherit;font-weight:600">Pexels</a></div></footer>
+
+  <script>
+    // Storage utility
+    const store = (() => {
+      let mem = {};
+      try {
+        localStorage.setItem('__t', '1'); localStorage.removeItem('__t');
+        return {
+          get: (k, d) => { try { return JSON.parse(localStorage.getItem(k)) ?? d; } catch { return d; } },
+          set: (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} },
+        };
+      } catch {
+        return { get: (k, d) => (k in mem ? mem[k] : d), set: (k, v) => { mem[k] = v; } };
+      }
+    })();
+
+    // Initial Starter Data
+    const defaultApps = [
+      { id: 'APP-101', name: 'Julian Vance', email: 'julian@example.com', phone: '+1 415 890 1204', category: 'Vehicle Lease-to-Own', value: 45000, term: 36, notes: 'BMW M340i pre-owned, verified consulting income.', status: 'Approved' },
+      { id: 'APP-102', name: 'Elena Rostova', email: 'elena.r@invest.org', phone: '+1 212 402 7711', category: 'Residential Real Estate', value: 240000, term: 60, notes: 'Two-bedroom apartment in Midtown, tech executive salary.', status: 'Pending' }
+    ];
+
+    let currentAssetType = 'car';
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    function setAssetType(type) {
+      currentAssetType = type;
+      document.getElementById('btn-car').classList.toggle('active', type === 'car');
+      document.getElementById('btn-re').classList.toggle('active', type === 're');
+      document.getElementById('btn-biz').classList.toggle('active', type === 'biz');
+
+      const valInput = document.getElementById('assetValInput');
+      if (type === 'car') {
+        valInput.min = 10000; valInput.max = 120000; valInput.step = 2500; valInput.value = 35000;
+      } else if (type === 're') {
+        valInput.min = 50000; valInput.max = 600000; valInput.step = 10000; valInput.value = 180000;
+      } else {
+        valInput.min = 20000; valInput.max = 400000; valInput.step = 5000; valInput.value = 75000;
+      }
+      updateCalculator();
+    }
+
+    function updateCalculator() {
+      const val = parseInt(document.getElementById('assetValInput').value, 10);
+      const downPct = parseInt(document.getElementById('downPayInput').value, 10);
+      const tenure = parseInt(document.getElementById('tenureInput').value, 10);
+
+      document.getElementById('assetValDisplay').textContent = '$' + val.toLocaleString();
+      document.getElementById('downPayDisplay').textContent = downPct + '%';
+      document.getElementById('tenureDisplay').textContent = tenure + ' Mo';
+
+      const deposit = Math.round(val * (downPct / 100));
+      const financed = val - deposit;
+      
+      // Amortized lease formula (nominal portfolio interest + asset factor)
+      const annualRate = currentAssetType === 'car' ? 0.085 : (currentAssetType === 're' ? 0.065 : 0.095);
+      const monthlyRate = annualRate / 12;
+      const monthlyPayment = Math.round((financed * monthlyRate * Math.pow(1 + monthlyRate, tenure)) / (Math.pow(1 + monthlyRate, tenure) - 1));
+
+      document.getElementById('monthlyResult').textContent = '$' + monthlyPayment.toLocaleString();
+      document.getElementById('depositAmount').textContent = '$' + deposit.toLocaleString();
+      document.getElementById('fundedAmount').textContent = '$' + financed.toLocaleString();
+      document.getElementById('durationResult').textContent = tenure + ' Months';
+    }
+
+    function applyFromCalculator() {
+      const val = document.getElementById('assetValInput').value;
+      const tenure = document.getElementById('tenureInput').value;
+      const catLabel = currentAssetType === 'car' ? 'Vehicle Lease-to-Own' : (currentAssetType === 're' ? 'Residential Real Estate' : 'Business Venture');
+      openApplicationModal(catLabel, val, tenure);
+    }
+
+    function openApplicationModal(category, val = 35000, term = 36) {
+      document.getElementById('formAssetCategory').value = category;
+      document.getElementById('formAssetValue').value = val;
+      document.getElementById('formAssetTerm').value = term;
+      document.getElementById('appModal').classList.add('open');
+    }
+
+    function closeApplicationModal() {
+      document.getElementById('appModal').classList.remove('open');
+      document.getElementById('formSuccess').style.display = 'none';
+    }
+
+    function handleFormSubmit(e) {
+      e.preventDefault();
+      const apps = store.get('inflow_apps', defaultApps);
+      const newApp = {
+        id: 'APP-' + Math.floor(100 + Math.random() * 900),
+        name: document.getElementById('applicantName').value,
+        email: document.getElementById('applicantEmail').value,
+        phone: document.getElementById('applicantPhone').value,
+        category: document.getElementById('formAssetCategory').value,
+        value: parseInt(document.getElementById('formAssetValue').value, 10),
+        term: parseInt(document.getElementById('formAssetTerm').value, 10),
+        notes: document.getElementById('applicantNotes').value,
+        status: 'Pending'
+      };
+      apps.unshift(newApp);
+      store.set('inflow_apps', apps);
+
+      document.getElementById('formSuccess').style.display = 'block';
+      setTimeout(() => {
+        closeApplicationModal();
+        renderDashboard();
+      }, 1400);
+    }
+
+    function toggleDashboard(show) {
+      const panel = document.getElementById('dashPanel');
+      if (show) {
+        panel.classList.add('open');
+        renderDashboard();
+      } else {
+        panel.classList.remove('open');
+      }
+    }
+
+    function toggleAppStatus(id) {
+      const apps = store.get('inflow_apps', defaultApps);
+      const target = apps.find(a => a.id === id);
+      if (target) {
+        target.status = target.status === 'Approved' ? 'Pending' : 'Approved';
+        store.set('inflow_apps', apps);
+        renderDashboard();
+      }
+    }
+
+    function renderDashboard() {
+      const apps = store.get('inflow_apps', defaultApps);
+      const tbody = document.getElementById('applicationTableBody');
+      tbody.innerHTML = '';
+
+      let totalSum = 0;
+      apps.forEach(a => {
+        totalSum += (a.value || 0);
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td><strong>${a.name}</strong><br><small style="color:var(--ink-muted);">${a.phone}</small></td>
+          <td>${a.category}</td>
+          <td><strong>$${(a.value || 0).toLocaleString()}</strong></td>
+          <td>${a.term} Mo</td>
+          <td><span class="status-badge status-${a.status}">${a.status}</span></td>
+          <td><button class="btn btn-outline" style="padding: 0.25rem 0.65rem; font-size: 0.75rem;" onclick="toggleAppStatus('${a.id}')">${a.status === 'Approved' ? 'Mark Pending' : 'Approve'}</button></td>
+        `;
+        tbody.appendChild(tr);
+      });
+
+      document.getElementById('totalPipelineCount').textContent = apps.length;
+      document.getElementById('totalPipelineSum').textContent = '$' + totalSum.toLocaleString();
+    }
+
+    // Initialize
+    updateCalculator();
+    renderDashboard();
+  </script>
+<script id="bc-logo-contrast">(function(){try{
+var L=function(c){var m=String(c).match(/[\d.]+/g);if(!m||m.length<3||(m.length>3&&+m[3]<0.5))return null;var f=function(v){v/=255;return v<=0.03928?v/12.92:Math.pow((v+0.055)/1.055,2.4)};return 0.2126*f(+m[0])+0.7152*f(+m[1])+0.0722*f(+m[2])};
+document.querySelectorAll('[data-bc-logo]').forEach(function(a){var e=a.parentElement,b=null;while(e&&e!==document.body&&e!==document.documentElement){var s=getComputedStyle(e);if(s.backgroundImage&&s.backgroundImage!=='none')return;b=L(s.backgroundColor);if(b!==null)break;e=e.parentElement}if(b===null)return;var t=L(getComputedStyle(a).color);if(t===null)return;if((Math.max(b,t)+0.05)/(Math.min(b,t)+0.05)<3)a.style.color=b<0.18?'#fff':'#111'})
+}catch(e){}})()</script>
+</body>
+</html>
